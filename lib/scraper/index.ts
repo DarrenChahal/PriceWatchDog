@@ -7,7 +7,7 @@ export async function scrapeAmazonProduct(url: string){
         return
     }
 
-    //curl --proxy brd.superproxy.io:22225 --proxy-user brd-customer-hl_8116e6a7-zone-web_unlocker1:fkvd18ei72ih -k "http://geo.brdtest.com/mygeo.json"
+    
     const username = String(process.env.BRIGHT_DATA_USERNAME);
     const password = String(process.env.BRIGHT_DATA_PASSWORD);
     const port = 22225;

@@ -60,8 +60,8 @@ Price Watch Dog is a web application built with Next.js that allows users to inp
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/your-username/price-watch-dog.git
-   cd price-watch-dog
+   git clone https://github.com/DarrenChahal/PriceWatchDog.git
+   cd PriceWatchDog
 2. **Install dependencies:**
     ```sh
     npm install

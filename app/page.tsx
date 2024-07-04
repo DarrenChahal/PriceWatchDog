@@ -4,17 +4,17 @@ import SearchBar from "@/components/SearchBar";
 import HeroCarousel from "@/components/HeroCarousel";
 import ProductCard from "@/components/ProductCard";
 import { getAllProducts } from "@/lib/actions";
-const Home = async ()=>{
+const Home = async () => {
   const allProducts = await getAllProducts();
 
-  return( 
-  <>
-    <section className="px-6 md:px-20 pyf-24">
+  return (
+    <>
+      <section className="px-6 md:px-20 pyf-24">
         <div className="flex max-xl:flex-col gap-16">
-          <div className="flex flex-col justify-center"> 
+          <div className="flex flex-col justify-center">
             <p className="small-text">
               Smart Shopping Starts Here:
-              <Image 
+              <Image
                 src="/assets/icons/arrow-right.svg"
                 alt="arrow-right"
                 width={16}
@@ -24,19 +24,19 @@ const Home = async ()=>{
 
             <h1 className="head-text">
               Unleash the Power of
-                <span className="text-primary"> PriceWatchDog</span>
+              <span className="text-primary"> PriceWatchDog</span>
             </h1>
-            
+
             <p className="mt-6">
               Powerful, self-serve product and growth analytics to help you convert, engage, and retain more.
             </p>
-            <SearchBar/>
+            <SearchBar />
           </div>
-          <HeroCarousel/>
+          <HeroCarousel />
         </div>
-    </section>
+      </section>
 
-    <section className="trending-section">
+      {/* <section className="trending-section">
       <h2 className="section-text">
         Trending
       </h2>
@@ -47,8 +47,19 @@ const Home = async ()=>{
 
       </div>
 
-    </section>
-  </>
+    </section> */}
+      <section className="trending-section">
+        <h2 className="section-text">
+          Trending
+        </h2>
+        <div className="trending-product-container">
+          {allProducts?.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </div>
+      </section>
+
+    </>
   )
 }
 

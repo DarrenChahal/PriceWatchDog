@@ -14,10 +14,10 @@ export async function GET(request: Request) {
 
         if (!products) throw new Error("No product fetched");
 
-        // ======================== 1 SCRAPE LATEST PRODUCT DETAILS & UPDATE DB
+        // SCRAPE LATEST PRODUCT DETAILS & UPDATE DB
         const updatedProducts = await Promise.all(
             products.map(async (currentProduct) => {
-                // Scrape product
+            
                 const scrapedProduct = await scrapeAmazonProduct(currentProduct.url);
 
                 if (!scrapedProduct) return;
@@ -37,7 +37,6 @@ export async function GET(request: Request) {
                     averagePrice: getAveragePrice(updatedPriceHistory),
                 };
 
-                // Update Products in DB
                 const updatedProduct = await Product.findOneAndUpdate(
                     {
                         url: product.url,
@@ -45,7 +44,7 @@ export async function GET(request: Request) {
                     product
                 );
 
-                // ======================== 2 CHECK EACH PRODUCT'S STATUS & SEND EMAIL ACCORDINGLY
+               //CHECK EACH PRODUCT'S STATUS & SEND EMAIL ACCORDINGLY
                 const emailNotifType = getEmailNotifType(
                     scrapedProduct,
                     currentProduct
@@ -56,11 +55,11 @@ export async function GET(request: Request) {
                         title: updatedProduct.title,
                         url: updatedProduct.url,
                     };
-                    // Construct emailContent
+                
                     const emailContent = await generateEmailBody(productInfo, emailNotifType);
                     // Get array of user emails
                     const userEmails = updatedProduct.users.map((user: any) => user.email);
-                    // Send email notification
+                    
                     await sendEmail(emailContent, userEmails);
                 }
 
